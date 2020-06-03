@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TaxCalculation.Domain.Enums;
 using TaxCalculation.Interfaces;
 
@@ -25,6 +20,18 @@ namespace TaxCalculation.Controllers
         public IActionResult CalculateTaxOf(int companyType)
         {
             return Ok(calculation.Calculate((CompanyType)companyType));
+        }
+
+        [HttpGet("CalculateByName")]
+        public IActionResult CalculateTaxOfName(string companyName)
+        {
+            return Ok(calculation.Calculate(companyName));
+        }
+
+        [HttpGet("CalculateBySIRET")]
+        public IActionResult CalculateTaxOfSIRET(int companySIRET)
+        {
+            return Ok(calculation.Calculate(companySIRET));
         }
     }
 }

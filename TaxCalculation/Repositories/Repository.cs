@@ -19,5 +19,14 @@ namespace TaxCalculation.Repositories
         {
             AllCompanies.Add(company);
         }
+
+        public Company GetCompany(string name){
+            var result = AllCompanies.Find(it=>it.Name == name);
+            return result;
+        }
+        public Company GetCompany(int siret){
+            var result = AllCompanies.Find(it=>it.SIRET == siret);
+            return result;
+        }
     }
 }

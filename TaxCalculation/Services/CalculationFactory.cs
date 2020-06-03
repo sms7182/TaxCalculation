@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using TaxCalculation.Interfaces;
 
 namespace TaxCalculation.Services
@@ -9,16 +11,15 @@ namespace TaxCalculation.Services
     public class CalculationFactory : ICalculationFactory
     {
 
-        private readonly SASCalculateOperation sASCalculateOperation;
-        private readonly SelfCalculateOperation selfCalculateOperation;
-        public CalculationFactory(SASCalculateOperation _sASCalculateOperation,SelfCalculateOperation _selfCalculateOperation)
-        {
-            sASCalculateOperation = _sASCalculateOperation;
-            selfCalculateOperation = _selfCalculateOperation;
-        }
         public List<ICalculateOperation> GenerateCalculateOperation()
         {
-          return  new List<ICalculateOperation>() { sASCalculateOperation,selfCalculateOperation};
+            var types = this.GetType().Assembly.GetTypes()
+                        .Where(it=>(typeof(ICalculateOperation)).IsAssignableFrom(it) && !it.IsInterface);
+           var result = types
+                        .Select(it=>Activator.CreateInstance(it))
+                        .Cast<ICalculateOperation>().ToList();
+                        return result;
+       
         }
     }
 }

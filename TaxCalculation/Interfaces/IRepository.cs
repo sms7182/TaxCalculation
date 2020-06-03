@@ -10,6 +10,9 @@ namespace TaxCalculation.Interfaces
     {
         void AddCompany(Company company);
 
-        public List<Company> AllCompanies { get; set; }
+         List<Company> AllCompanies { get; set; }
+         Company GetCompany(string name);
+         Company GetCompany(int siret);
+
     }
 }

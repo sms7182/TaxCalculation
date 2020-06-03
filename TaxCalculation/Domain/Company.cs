@@ -10,7 +10,7 @@ namespace TaxCalculation.Domain
     {
         public int SIRET { get; set; }
         public string Name { get; set; }
-        public CompanyType CompanyType { get; set; }
+        public abstract CompanyType CompanyType { get; }
         public decimal Turnover { get; set; }
     }
 }

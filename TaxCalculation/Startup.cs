@@ -32,8 +32,7 @@ namespace TaxCalculation
             services.AddSingleton<IRepository, Repository>();
             services.AddTransient<ISelfEnterpriseService, SelfEnterpriseService>();
             services.AddTransient<ISASService, SASService>();
-            services.AddScoped<SelfCalculateOperation>();
-            services.AddScoped<SASCalculateOperation>();
+           
             services.AddTransient<ICalculation, Calculation>();
             services.AddScoped<ICalculationFactory, CalculationFactory>();
 
